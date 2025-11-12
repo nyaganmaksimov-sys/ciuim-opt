@@ -1,0 +1,186 @@
+
+### 2. index.html
+
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЦУИМ.Опт - Оптовый маркетплейс для предпринимателей</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <h1>ЦУИМ.<span>Опт</span></h1>
+                </div>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Вход</button>
+                    <button class="btn btn-primary" id="registerBtn">Регистрация</button>
+                </div>
+            </div>
+            <div class="nav-main">
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="pages/catalog.html">Каталог</a></li>
+                    <li><a href="pages/seller.html">Для поставщиков</a></li>
+                    <li><a href="#">Как это работает</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+                <div class="search-bar">
+                    <input type="text" placeholder="Поиск товаров..." id="searchInput">
+                    <button id="searchBtn">Найти</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Оптовый маркетплейс для предпринимателей</h2>
+            <p>Прямые поставки от производителей и фермеров. Только для юридических лиц и индивидуальных предпринимателей.</p>
+            <button class="btn btn-primary" id="startShoppingBtn">Начать покупки</button>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="container">
+        <h2 class="section-title">Категории товаров</h2>
+        <div class="categories" id="categoriesGrid">
+            <!-- Categories will be loaded by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container">
+        <h2 class="section-title">Популярные товары</h2>
+        
+        <div class="filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="category">Категория</label>
+                    <select id="category">
+                        <option value="">Все категории</option>
+                        <option value="packaging">Упаковка и этикетки</option>
+                        <option value="raw">Сырьё для handmade</option>
+                        <option value="food">Продукты питания</option>
+                        <option value="household">Хозтовары и химия</option>
+                        <option value="equipment">Оборудование</option>
+                        <option value="semi">Заготовки и полуфабрикаты</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="min-order">Мин. сумма заказа</label>
+                    <select id="min-order">
+                        <option value="">Любая</option>
+                        <option value="5000">до 5 000 руб</option>
+                        <option value="10000">до 10 000 руб</option>
+                        <option value="20000">до 20 000 руб</option>
+                        <option value="50000">до 50 000 руб</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="seller-type">Тип продавца</label>
+                    <select id="seller-type">
+                        <option value="">Все</option>
+                        <option value="manufacturer">Производитель</option>
+                        <option value="distributor">Дистрибьютор</option>
+                        <option value="farmer">Фермер</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="delivery">Способ доставки</label>
+                    <select id="delivery">
+                        <option value="">Любой</option>
+                        <option value="pickup">Самовывоз</option>
+                        <option value="terminal">До пункта выдачи</option>
+                        <option value="door">До двери</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="tags">Теги</label>
+                    <select id="tags">
+                        <option value="">Все теги</option>
+                        <option value="masters">#длямастеров</option>
+                        <option value="ip">#толькоИП</option>
+                        <option value="farmer">#фермерскийопт</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-primary" id="applyFiltersBtn">Применить фильтры</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be loaded by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Verification Banner -->
+    <section class="container">
+        <div class="verification-banner">
+            <h3>Только для предпринимателей</h3>
+            <p>Для оформления заказа и получения контактов продавцов необходимо пройти верификацию</p>
+            <button class="btn btn-primary" id="verifyBtn">Пройдите верификацию</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>О компании</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Партнёры</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Помощь</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Как сделать заказ</a></li>
+                        <li><a href="#">Доставка</a></li>
+                        <li><a href="#">Оплата</a></li>
+                        <li><a href="#">Возврат</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Для продавцов</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/seller.html">Разместить товары</a></li>
+                        <li><a href="#">Тарифы</a></li>
+                        <li><a href="#">Правила площадки</a></li>
+                        <li><a href="#">Поддержка продавцов</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li>Телефон: +7 (495) 123-45-67</li>
+                        <li>Email: opt@ciuim.ru</li>
+                        <li>Адрес: Москва, ул. Примерная, д. 1</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 ЦУИМ.Опт - Оптовый маркетплейс для предпринимателей. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
