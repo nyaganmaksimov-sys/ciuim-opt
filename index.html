@@ -112,13 +112,14 @@
             width: auto;
         }
         
-        /* Marketplace Switcher */
+        /* Marketplace Switcher - обновленная версия */
         .marketplace-switcher {
             display: flex;
             background: var(--light-gray);
             border-radius: 25px;
             padding: 4px;
             position: relative;
+            border: 1px solid #ddd;
         }
         
         .switcher-option {
@@ -132,31 +133,20 @@
             position: relative;
             text-align: center;
             min-width: 120px;
+            color: var(--medium-gray);
         }
         
         .switcher-option.active {
             color: var(--white);
+            font-weight: 600;
         }
         
-        .switcher-slider {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            height: calc(100% - 8px);
-            border-radius: 20px;
-            background: var(--primary-orange);
-            transition: all 0.3s ease;
-            z-index: 1;
+        .switcher-option.retail.active {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0088ff 100%);
         }
         
-        .switcher-option:first-child.active ~ .switcher-slider {
-            transform: translateX(0);
-            width: 120px;
-        }
-        
-        .switcher-option:last-child.active ~ .switcher-slider {
-            transform: translateX(120px);
-            width: 120px;
+        .switcher-option.opt.active {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #ff8c42 100%);
         }
         
         /* Search Bar */
@@ -495,9 +485,8 @@
                     </a>
                     
                     <div class="marketplace-switcher">
-                        <div class="switcher-option" data-target="retail">Обычный</div>
-                        <div class="switcher-option active" data-target="opt">Оптовый</div>
-                        <div class="switcher-slider"></div>
+                        <div class="switcher-option retail" data-target="retail">Обычный</div>
+                        <div class="switcher-option opt active" data-target="opt">Оптовый</div>
                     </div>
                 </div>
                 
