@@ -1,676 +1,1099 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЦУИМ.Опт - Оптовый маркетплейс для предпринимателей</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-orange: #FF6B00;
-            --primary-blue: #0066CC;
-            --light-blue: #E6F0FF;
-            --light-orange: #FFF0E6;
-            --dark-gray: #333333;
-            --medium-gray: #666666;
-            --light-gray: #F5F5F5;
-            --white: #FFFFFF;
-            --border-radius: 8px;
-            --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--white);
-            color: var(--dark-gray);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header styles - идентично основному сайту ЦУИМ */
-        .top-header {
-            background: linear-gradient(90deg, var(--primary-orange) 0%, #ff8c42 100%);
-            color: white;
-            padding: 8px 0;
-            font-size: 14px;
-        }
-        
-        .top-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .city-selector {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-        
-        .city-selector i {
-            font-size: 12px;
-        }
-        
-        .top-header-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .top-header-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        
-        .top-header-links a:hover {
-            opacity: 0.8;
-        }
-        
-        /* Main Header */
-        .main-header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-main-row {
-            display: flex;
-            align-items: center;
-            padding: 15px 0;
-            gap: 30px;
-        }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-        
-        .logo img {
-            height: 40px;
-            width: auto;
-        }
-        
-        /* Marketplace Switcher - обновленная версия */
-        .marketplace-switcher {
-            display: flex;
-            background: var(--light-gray);
-            border-radius: 25px;
-            padding: 4px;
-            position: relative;
-            border: 1px solid #ddd;
-        }
-        
-        .switcher-option {
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            z-index: 2;
-            position: relative;
-            text-align: center;
-            min-width: 120px;
-            color: var(--medium-gray);
-        }
-        
-        .switcher-option.active {
-            color: var(--white);
-            font-weight: 600;
-        }
-        
-        .switcher-option.retail.active {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #0088ff 100%);
-        }
-        
-        .switcher-option.opt.active {
-            background: linear-gradient(135deg, var(--primary-orange) 0%, #ff8c42 100%);
-        }
-        
-        /* Search Bar */
-        .search-section {
-            flex: 1;
-            max-width: 600px;
-        }
-        
-        .search-bar {
-            display: flex;
-            width: 100%;
-            border: 2px solid var(--primary-orange);
-            border-radius: 25px;
-            overflow: hidden;
-        }
-        
-        .search-bar input {
-            flex: 1;
-            padding: 12px 20px;
-            border: none;
-            outline: none;
-            font-size: 16px;
-        }
-        
-        .search-bar button {
-            background-color: var(--primary-orange);
-            color: white;
-            border: none;
-            padding: 0 25px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .search-bar button:hover {
-            background-color: #e55a00;
-        }
-        
-        /* Header Actions */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .header-action {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--dark-gray);
-            transition: color 0.3s;
-        }
-        
-        .header-action i {
-            font-size: 20px;
-            margin-bottom: 4px;
-        }
-        
-        .header-action span {
-            font-size: 12px;
-        }
-        
-        .header-action:hover {
-            color: var(--primary-orange);
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            font-size: 14px;
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary-blue);
-            color: var(--primary-blue);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-orange);
-            color: var(--white);
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--box-shadow);
-        }
-        
-        /* Navigation */
-        .main-nav {
-            border-top: 1px solid #eee;
-            padding: 15px 0;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-gray);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-orange);
-        }
-        
-        .nav-links a i {
-            font-size: 14px;
-        }
-        
-        /* Hero section */
-        .hero {
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-orange) 100%);
-            padding: 80px 0;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            color: var(--dark-gray);
-        }
-        
-        .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: var(--medium-gray);
-        }
-        
-        /* Categories section */
-        .section-title {
-            font-size: 28px;
-            margin: 40px 0 20px;
-            text-align: center;
-            color: var(--dark-gray);
-        }
-        
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .category-card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 25px 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            border: 1px solid #f0f0f0;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .category-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            color: var(--primary-blue);
-        }
-        
-        .category-card h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--dark-gray);
-        }
-        
-        .category-card p {
-            color: var(--medium-gray);
-            font-size: 14px;
-        }
-        
-        /* Verification banner */
-        .verification-banner {
-            background-color: var(--light-blue);
-            padding: 30px;
-            border-radius: var(--border-radius);
-            margin: 40px 0;
-            text-align: center;
-            border-left: 4px solid var(--primary-blue);
-        }
-        
-        .verification-banner h3 {
-            margin-bottom: 10px;
-            color: var(--primary-blue);
-            font-size: 24px;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-gray);
-            color: var(--white);
-            padding: 50px 0 20px;
-            margin-top: 60px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-column h4 {
-            margin-bottom: 20px;
-            font-size: 18px;
-            color: var(--primary-orange);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-orange);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            color: #999;
-            font-size: 14px;
-        }
-        
-        /* Responsive styles */
-        @media (max-width: 1024px) {
-            .header-main-row {
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-            
-            .search-section {
-                order: 3;
-                max-width: 100%;
-                min-width: 100%;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .top-header .container {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .logo-section {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .marketplace-switcher {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .header-actions {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-links {
-                flex-wrap: wrap;
-                gap: 15px;
-                justify-content: center;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Оптовый маркетплейс — ЦУИМ Барнаул</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-600:#0D47A1;
+      --blue-500:#1565C0;
+      --blue-400:#1E88E5;
+      --orange-600:#FF6F00;
+      --orange-500:#FF7A12;
+      --red-600:#E53935;
+      --red-500:#FF5252;
+      --yellow-600:#FFB300;
+      --green-500:#4CAF50;
+      --purple-500:#9C27B0;
+      --bg:#F6F8FB;
+      --panel:#FFFFFF;
+      --text:#1F2937;
+      --muted:#667085;
+      --border:#E5E9F0;
+      --radius:12px;
+      --radius-lg:16px;
+      --shadow-1:0 2px 12px rgba(13,71,161,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow-2:0 8px 24px rgba(13,71,161,.12), 0 2px 6px rgba(0,0,0,.06);
+      --shadow-hover:0 12px 32px rgba(13,71,161,.16), 0 4px 12px rgba(0,0,0,.08);
+      --ring:0 0 0 3px rgba(21,101,192,.12);
+      --container: 1280px;
+      --transition:all .2s cubic-bezier(.4,.0,.2,1);
+    }
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;
+      line-height: 1.5;
+    }
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit; cursor: pointer;}
+    .container{
+      width:min(100% - 32px, var(--container)); margin-inline:auto;
+    }
+
+    /* ======= ШАПКА (как на главной) ======= */
+    .top-header {
+      background: linear-gradient(90deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    
+    .top-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .city-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    
+    .delivery-info {
+      font-size: 14px;
+    }
+
+    /* Main Header */
+    .main-header {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .header-main-row {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      gap: 20px;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+    
+    /* Categories Dropdown */
+    .categories-dropdown {
+      position: relative;
+    }
+
+    .categories-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--blue-600);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .categories-btn:hover {
+      background: var(--orange-600);
+      transform: translateY(-1px);
+    }
+
+    .categories-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 280px;
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-2);
+      padding: 12px;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .categories-dropdown:hover .categories-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .categories-menu .cat-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .categories-menu .cat-item a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .categories-menu .cat-item a:hover {
+      background: rgba(255,122,18,.15);
+    }
+
+    .categories-menu .cat-ico {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange-600), var(--orange-500));
+      font-size: 12px;
+    }
+
+    .categories-menu .cat-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    /* Marketplace Switcher */
+    .marketplace-switcher {
+      display: flex;
+      background: #f5f5f5;
+      border-radius: 25px;
+      padding: 4px;
+      position: relative;
+      border: 1px solid #ddd;
+      gap: 2px;
+    }
+    
+    .switcher-option {
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      z-index: 2;
+      position: relative;
+      text-align: center;
+      min-width: 100px;
+      color: #666;
+      white-space: nowrap;
+    }
+    
+    .switcher-option.active {
+      color: white;
+      font-weight: 600;
+    }
+    
+    .switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+    }
+    
+    .switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+    }
+    
+    .switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+    }
+    
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .header-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      transition: color 0.3s;
+      font-size: 12px;
+    }
+    
+    .header-action:hover {
+      color: var(--orange-600);
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 14px;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--blue-600);
+      color: var(--blue-600);
+    }
+    
+    .btn-primary {
+      background-color: var(--orange-600);
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-1);
+    }
+
+    .header-action .icon {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Mobile Marketplace Switcher */
+    .mobile-marketplace-switcher {
+      display: none;
+      width: 100%;
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 6px;
+      margin-top: 8px;
+    }
+    
+    .mobile-switcher-options {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    
+    .mobile-switcher-option {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #666;
+      font-size: 11px;
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .mobile-switcher-option.active {
+      background: white;
+      color: var(--blue-600);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-weight: 600;
+    }
+    
+    .mobile-switcher-option.retail.active {
+      background: linear-gradient(135deg, var(--blue-600) 0%, #0088ff 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.opt.active {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option.ads.active {
+      background: linear-gradient(135deg, var(--green-500) 0%, #43A047 100%);
+      color: white;
+    }
+    
+    .mobile-switcher-option .icon {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    /* Main Search Bar - под шапкой */
+    .main-search-section {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .main-search-bar {
+      display: flex;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border: 2px solid var(--orange-600);
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+    }
+    
+    .main-search-bar input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: white;
+    }
+    
+    .main-search-bar button {
+      background-color: var(--orange-600);
+      color: white;
+      border: none;
+      padding: 0 30px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    
+    .main-search-bar button:hover {
+      background-color: #e55a00;
+    }
+
+    /* Контент оптового маркетплейса */
+    .opt-hero {
+      background: linear-gradient(135deg, var(--orange-600) 0%, #ff8c42 100%);
+      color: white;
+      padding: 60px 0;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .opt-hero h1 {
+      font-size: 42px;
+      margin: 0 0 20px 0;
+      font-weight: 700;
+    }
+    
+    .opt-hero p {
+      font-size: 20px;
+      margin: 0 0 30px 0;
+      opacity: 0.9;
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    
+    .opt-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .feature-card {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-1);
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    
+    .feature-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+    
+    .feature-description {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    
+    .opt-categories {
+      margin-bottom: 50px;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .section-title h2 {
+      font-size: 32px;
+      color: var(--text);
+      margin-bottom: 15px;
+    }
+    
+    .section-title p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .category-card {
+      background: var(--panel);
+      border-radius: var(--radius-lg);
+      padding: 25px;
+      text-align: center;
+      box-shadow: var(--shadow-1);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .category-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+    
+    .category-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .opt-benefits {
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      padding: 60px 0;
+      margin: 50px 0;
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .benefit-item {
+      text-align: center;
+      padding: 30px;
+    }
+    
+    .benefit-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: var(--orange-600);
+    }
+    
+    .benefit-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+    
+    .benefit-description {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .site-footer{
+      background: var(--panel);
+      border-top: 1px solid rgba(13,71,161,.08);
+      padding: 40px 0 20px;
+      margin-top: 50px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-column h3 {
+      color: #163a69;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #667085;
+      font-size: 14px;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue-600);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(13,71,161,.08);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      color: #667085;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--blue-600);
+    }
+
+    /* ======= АДАПТИВНЫЕ СТИЛИ ======= */
+
+    @media (max-width: 1024px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .hero-stats {
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .opt-hero {
+        padding: 40px 0;
+      }
+      
+      .opt-hero h1 {
+        font-size: 32px;
+      }
+      
+      .opt-hero p {
+        font-size: 18px;
+      }
+      
+      .stat-number {
+        font-size: 28px;
+      }
+      
+      .hero-stats {
+        gap: 20px;
+      }
+      
+      .section-title h2 {
+        font-size: 28px;
+      }
+
+      /* АДАПТИВНАЯ ШАПКА ДЛЯ МОБИЛЬНЫХ */
+      .top-header .container {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      
+      .main-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .header-main-row {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 0;
+        align-items: center;
+      }
+      
+      .logo-section {
+        order: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .logo {
+        flex-shrink: 0;
+      }
+      
+      .categories-dropdown {
+        order: 1;
+        flex: 1;
+        margin-left: 10px;
+      }
+      
+      .categories-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+      
+      /* Переключатель страниц - скрываем на мобильных */
+      .marketplace-switcher {
+        display: none;
+      }
+      
+      .header-actions {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 5px;
+      }
+      
+      .auth-buttons {
+        display: none;
+      }
+      
+      .header-action {
+        font-size: 14px;
+        min-width: 55px;
+      }
+
+      .header-action .icon {
+        font-size: 20px;
+        margin-bottom: 2px;
+      }
+      
+      /* Мобильный переключатель маркетплейсов */
+      .mobile-marketplace-switcher {
+        display: block;
+        order: 2;
+      }
+      
+      .main-search-section {
+        order: 4;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-actions {
+        gap: 8px;
+      }
+      
+      .header-action {
+        min-width: 55px;
+        padding: 4px 4px;
+        font-size: 11px;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 10px;
+        padding: 6px 2px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 14px;
+      }
+      
+      .opt-hero h1 {
+        font-size: 28px;
+      }
+      
+      .opt-hero p {
+        font-size: 16px;
+      }
+      
+      .stat-number {
+        font-size: 24px;
+      }
+      
+      .hero-stats {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .header-actions {
+        gap: 6px;
+      }
+      
+      .header-action {
+        min-width: 50px;
+        font-size: 10px;
+      }
+      
+      .mobile-switcher-option {
+        font-size: 9px;
+      }
+      
+      .mobile-switcher-option .icon {
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Top Header -->
-    <div class="top-header">
-        <div class="container">
-            <div class="city-selector">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Москва</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="top-header-links">
-                <a href="#">Для бизнеса</a>
-                <a href="#">Помощь</a>
-                <a href="#">Стать продавцом</a>
-            </div>
-        </div>
+  <!-- Верхняя плашка с адресом -->
+  <div class="top-header">
+    <div class="container">
+      <span class="city-selector" id="locationPicker">
+        📍 <span id="selectedCity">Барнаул</span>
+      </span>
+      <span class="delivery-info">Доставка: от 45 мин · Самовывоз из <strong>12 ПВЗ</strong></span>
     </div>
+  </div>
 
-    <!-- Main Header -->
-    <header class="main-header">
-        <div class="container">
-            <div class="header-main-row">
-                <div class="logo-section">
-                    <a href="#" class="logo">
-                        <img src="images/logo-opt.png" alt="ЦУИМ.Опт">
-                    </a>
-                    
-                    <div class="marketplace-switcher">
-                        <div class="switcher-option retail" data-target="retail">Обычный</div>
-                        <div class="switcher-option opt active" data-target="opt">Оптовый</div>
-                    </div>
-                </div>
-                
-                <div class="search-section">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Поиск товаров оптом...">
-                        <button><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-                
-                <div class="header-actions">
-                    <a href="#" class="header-action">
-                        <i class="far fa-heart"></i>
-                        <span>Избранное</span>
-                    </a>
-                    <a href="#" class="header-action">
-                        <i class="far fa-bell"></i>
-                        <span>Уведомления</span>
-                    </a>
-                    <a href="#" class="header-action">
-                        <i class="far fa-user"></i>
-                        <span>Профиль</span>
-                    </a>
-                    
-                    <div class="auth-buttons">
-                        <button class="btn btn-outline">Вход</button>
-                        <button class="btn btn-primary">Регистрация</button>
-                    </div>
-                </div>
+  <!-- Основная шапка -->
+  <header class="main-header">
+    <div class="container">
+      <div class="header-main-row">
+        <div class="logo-section">
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="logo">
+            <img src="https://raw.githubusercontent.com/nyaganmaksimov-sys/cuim/a367aa670918ce33f1cd9436cf78ed1e2bc4ea4a/images/logo.svg" alt="ЦУИМ">
+          </a>
+          
+          <!-- Кнопка категорий -->
+          <div class="categories-dropdown">
+            <button class="categories-btn">
+              📋 Категории
+              <span>▼</span>
+            </button>
+            <div class="categories-menu">
+              <ul class="cat-list">
+                <li class="cat-item"><a href="#"><span class="cat-ico">🥦</span><span class="cat-name">Продукты питания</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🍱</span><span class="cat-name">Готовая еда</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">👕</span><span class="cat-name">Одежда</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">💄</span><span class="cat-name">Красота и здоровье</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🧸</span><span class="cat-name">Детские товары</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🏡</span><span class="cat-name">Дом и сад</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🛋️</span><span class="cat-name">Мебель</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">🎣</span><span class="cat-name">Рыбалка и охота</span></a></li>
+                <li class="cat-item"><a href="#"><span class="cat-ico">✏️</span><span class="cat-name">Канцелярия</span></a></li>
+              </ul>
             </div>
-            
-            <nav class="main-nav">
-                <ul class="nav-links">
-                    <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
-                    <li><a href="#"><i class="fas fa-th-large"></i> Категории</a></li>
-                    <li><a href="#"><i class="fas fa-box-open"></i> Упаковка и этикетки</a></li>
-                    <li><a href="#"><i class="fas fa-seedling"></i> Сырьё для handmade</a></li>
-                    <li><a href="#"><i class="fas fa-utensils"></i> Продукты питания</a></li>
-                    <li><a href="#"><i class="fas fa-soap"></i> Хозтовары и химия</a></li>
-                    <li><a href="#"><i class="fas fa-tools"></i> Оборудование</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+          </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Оптовый маркетплейс для предпринимателей</h1>
-            <p>Прямые поставки от производителей и фермеров. Только для юридических лиц и индивидуальных предпринимателей.</p>
-            <button class="btn btn-primary" style="padding: 15px 30px; font-size: 18px;">Начать покупки</button>
+          <div class="marketplace-switcher">
+            <div class="switcher-option retail"><a href="https://nyaganmaksimov-sys.github.io/cuim/" style="color: inherit; text-decoration: none;">Обычный</a></div>
+            <div class="switcher-option opt active">Оптовый</div>
+            <div class="switcher-option ads"><a href="https://nyaganmaksimov-sys.github.io/cuim/ads-board.html" style="color: inherit; text-decoration: none;">Объявления</a></div>
+          </div>
         </div>
+        
+        <div class="header-actions">
+          <a href="#" class="header-action"><span class="icon">❤️</span><span>Избранное</span></a>
+          <a href="#" class="header-action"><span class="icon">🛒</span><span>Корзина</span></a>
+          <a href="#" class="header-action"><span class="icon">🔔</span><span>Уведомления</span></a>
+          <a href="#" class="header-action"><span class="icon">👤</span><span>Профиль</span></a>
+          
+          <div class="auth-buttons">
+            <button class="btn btn-outline">Вход</button>
+            <button class="btn btn-primary">Регистрация</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Мобильный переключатель маркетплейсов -->
+      <div class="mobile-marketplace-switcher">
+        <div class="mobile-switcher-options">
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/" class="mobile-switcher-option retail">
+            <span class="icon">🛍️</span>
+            <span>Маркетплейс</span>
+          </a>
+          <a href="https://nyaganmaksimov-sys.github.io/ciuim-opt/" class="mobile-switcher-option opt active">
+            <span class="icon">📦</span>
+            <span>Оптовый</span>
+          </a>
+          <a href="https://nyaganmaksimov-sys.github.io/cuim/ads-board.html" class="mobile-switcher-option ads">
+            <span class="icon">📋</span>
+            <span>Объявления</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Поисковая строка под шапкой -->
+  <section class="main-search-section">
+    <div class="container">
+      <div class="main-search-bar">
+        <input type="text" placeholder="Поиск оптовых товаров: продукты, одежда, электроника...">
+        <button>🔍 Найти</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Основной контент -->
+  <main>
+    <!-- Герой-секция -->
+    <section class="opt-hero">
+      <div class="container">
+        <h1>Оптовый маркетплейс</h1>
+        <p>Выгодные закупки для бизнеса с доставкой по Барнаулу</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Оптовых поставщиков</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">10 000+</div>
+            <div class="stat-label">Товаров в каталоге</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Поддержка бизнеса</div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="container">
-        <h2 class="section-title">Категории товаров</h2>
-        <div class="categories">
-            <div class="category-card">
-                <div class="category-icon">📦</div>
-                <h3>Упаковка и этикетки</h3>
-                <p>Банки, бутылки, коробки, этикетки, стикеры</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">🛠️</div>
-                <h3>Сырьё для handmade</h3>
-                <p>Воск, фитили, аромамасла, клей, ткань, нитки</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">🍯</div>
-                <h3>Продукты питания</h3>
-                <p>Мёд, варенье, мука, крупы, молочка от фермеров</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">🧼</div>
-                <h3>Хозтовары и химия</h3>
-                <p>Моющие средства, перчатки, мешки, салфетки</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">⚙️</div>
-                <h3>Оборудование</h3>
-                <p>Кофемашины, блендеры, принтеры этикеток</p>
-            </div>
-            <div class="category-card">
-                <div class="category-icon">🥟</div>
-                <h3>Заготовки и полуфабрикаты</h3>
-                <p>Тесто, пельмени, соусы, заготовки на зиму</p>
-            </div>
+    <div class="container">
+      <!-- Ключевые возможности -->
+      <section class="opt-features">
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3 class="feature-title">Оптовые цены</h3>
+          <p class="feature-description">Специальные цены для бизнеса при заказе от 10 000 рублей. Скидки увеличиваются с объемом заказа.</p>
         </div>
-    </section>
-
-    <!-- Verification Banner -->
-    <section class="container">
-        <div class="verification-banner">
-            <h3>Только для предпринимателей</h3>
-            <p>Для оформления заказа и получения контактов продавцов необходимо пройти верификацию</p>
-            <button class="btn btn-primary">Пройдите верификацию</button>
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <h3 class="feature-title">Бесплатная доставка</h3>
+          <p class="feature-description">Доставка заказов от 50 000 рублей бесплатно. Быстрая логистика по всему Барнаулу.</p>
         </div>
-    </section>
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3 class="feature-title">Отсрочка платежа</h3>
+          <p class="feature-description">Для постоянных клиентов предоставляем отсрочку платежа до 30 календарных дней.</p>
+        </div>
+      </section>
 
-    <!-- Footer -->
-    <footer>
+      <!-- Популярные категории -->
+      <section class="opt-categories">
+        <div class="section-title">
+          <h2>Популярные категории</h2>
+          <p>Широкий ассортимент товаров для вашего бизнеса</p>
+        </div>
+        <div class="categories-grid">
+          <div class="category-card">
+            <div class="category-icon">🥦</div>
+            <div class="category-name">Продукты питания</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">👕</div>
+            <div class="category-name">Одежда и обувь</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">🏠</div>
+            <div class="category-name">Товары для дома</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">💄</div>
+            <div class="category-name">Косметика</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">🧸</div>
+            <div class="category-name">Детские товары</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon">📱</div>
+            <div class="category-name">Электроника</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Преимущества -->
+      <section class="opt-benefits">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h4>О компании</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Контакты</a></li>
-                        <li><a href="#">Партнёры</a></li>
-                        <li><a href="#">Вакансии</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Помощь</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Как сделать заказ</a></li>
-                        <li><a href="#">Доставка</a></li>
-                        <li><a href="#">Оплата</a></li>
-                        <li><a href="#">Возврат</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Для продавцов</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Разместить товары</a></li>
-                        <li><a href="#">Тарифы</a></li>
-                        <li><a href="#">Правила площадки</a></li>
-                        <li><a href="#">Поддержка продавцов</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Контакты</h4>
-                    <ul class="footer-links">
-                        <li>Телефон: +7 (495) 123-45-67</li>
-                        <li>Email: opt@ciuim.ru</li>
-                        <li>Адрес: Москва, ул. Примерная, д. 1</li>
-                    </ul>
-                </div>
+          <div class="section-title">
+            <h2>Преимущества для бизнеса</h2>
+            <p>Почему предприниматели выбирают наш оптовый маркетплейс</p>
+          </div>
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon">⚡</div>
+              <h3 class="benefit-title">Быстрый старт</h3>
+              <p class="benefit-description">Регистрация бизнес-аккаунта за 5 минут. Начните закупать уже сегодня.</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 ЦУИМ.Опт - Оптовый маркетплейс для предпринимателей. Все права защищены.</p>
+            <div class="benefit-item">
+              <div class="benefit-icon">🛡️</div>
+              <h3 class="benefit-title">Гарантия качества</h3>
+              <p class="benefit-description">Все поставщики проходят строгую проверку. Гарантия на все товары.</p>
             </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">📊</div>
+              <h3 class="benefit-title">Аналитика продаж</h3>
+              <p class="benefit-description">Подробные отчеты и аналитика для контроля вашего бизнеса.</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">👨‍💼</div>
+              <h3 class="benefit-title">Персональный менеджер</h3>
+              <p class="benefit-description">Выделенный менеджер для решения любых вопросов по закупкам.</p>
+            </div>
+          </div>
         </div>
-    </footer>
+      </section>
+    </div>
+  </main>
 
-    <script>
-        // Переключатель между обычным и оптовым маркетплейсом
-        document.addEventListener('DOMContentLoaded', function() {
-            const switcherOptions = document.querySelectorAll('.switcher-option');
-            
-            switcherOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const target = this.getAttribute('data-target');
-                    
-                    // Убираем активный класс у всех опций
-                    switcherOptions.forEach(opt => opt.classList.remove('active'));
-                    
-                    // Добавляем активный класс к выбранной опции
-                    this.classList.add('active');
-                    
-                    // Переход на соответствующий маркетплейс
-                    if (target === 'retail') {
-                        window.location.href = 'https://nyaganmaksimov-sys.github.io/cuim/'; // Обычный маркетплейс
-                    } else if (target === 'opt') {
-                        window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/'; // Оптовый маркетплейс
-                    }
-                });
-            });
-            
-            // Обработка кнопок авторизации
-            document.querySelector('.btn-outline').addEventListener('click', function() {
-                alert('Форма входа для предпринимателей');
-            });
-            
-            document.querySelector('.btn-primary').addEventListener('click', function() {
-                alert('Форма регистрации для предпринимателей');
-            });
-            
-            // Обработка кнопки "Начать покупки"
-            document.querySelector('.hero .btn-primary').addEventListener('click', function() {
-                window.location.href = '#categories';
-            });
-        });
-    </script>
+  <!-- Футер -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>О ЦУИМ</h3>
+          <p style="color: #667085; font-size: 14px; line-height: 1.5; margin-bottom: 15px;">
+            Местный маркетплейс Барнаула. Свежие продукты, готовые блюда, товары для дома и многое другое с быстрой доставкой и самовывозом.
+          </p>
+          <div style="background: rgba(21,101,192,.05); padding: 15px; border-radius: var(--radius); margin-top: 10px;">
+            <p style="margin: 5px 0; font-size: 13px;"><strong>Техническая поддержка:</strong></p>
+            <p style="margin: 5px 0; font-size: 13px;">📞 8 (800) 555-35-35</p>
+            <p style="margin: 5px 0; font-size: 13px;">✉️ support@cuim.ru</p>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Покупателям</h3>
+          <ul class="footer-links">
+            <li><a href="#">Доставка и оплата</a></li>
+            <li><a href="#">Возврат и обмен</a></li>
+            <li><a href="#">Акции и скидки</a></li>
+            <li><a href="#">Бонусная программа</a></li>
+            <li><a href="#">Подарочные карты</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Продавцам</h3>
+          <ul class="footer-links">
+            <li><a href="#">Стать продавцом</a></li>
+            <li><a href="#">Личный кабинет</a></li>
+            <li><a href="#">Условия сотрудничества</a></li>
+            <li><a href="#">Комиссии и тарифы</a></li>
+            <li><a href="#">Партнёрская программа</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Информация</h3>
+          <ul class="footer-links">
+            <li><a href="#">О компании</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Вакансии</a></li>
+            <li><a href="#">Пользовательское соглашение</a></li>
+            <li><a href="#">Политика конфиденциальности</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          © 2025 ЦУИМ — Местный маркетплейс Барнаула. Все права защищены.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#">Пользовательское соглашение</a>
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Карта сайта</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Оптовый маркетплейс ЦУИМ загружен!');
+    });
+  </script>
 </body>
 </html>
