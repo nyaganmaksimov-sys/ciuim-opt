@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2020 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="101.606mm" height="23.8557mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 596.47 140.04"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <font id="FontID0" horiz-adv-x="607" font-variant="normal" style="fill-rule:nonzero" font-weight="400">
+	<font-face 
+		font-family="Franklin Gothic Demi">
+		<font-face-src>
+			<font-face-name name="Franklin Gothic Demi"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="О" horiz-adv-x="639" d="M316.999 -9.99729c-89.6656,0 -159.166,33.6653 -208.331,100.996 -49.165,67.5011 -73.6699,148.998 -73.6699,244.67 0,97.3302 24.8382,178.494 74.6697,243.663 49.8314,65.1684 120.665,97.6712 212.834,97.6712 92.998,0 163.165,-34.6728 210.501,-104.166 47.3282,-69.5005 70.9962,-149.169 70.9962,-238.672 0,-96.6637 -24.3345,-178.169 -73.1662,-244.5 -48.8317,-66.5013 -119.998,-99.6629 -213.833,-99.6629zm4.50265 559.995c-81.6678,0 -122.502,-71.996 -122.502,-216.166 0,-144.496 40.8339,-216.833 122.502,-216.833 79.0018,0 118.495,72.1665 118.495,216.337 0,144.496 -39.4932,216.662 -118.495,216.662z"/>
+   <glyph unicode="П" horiz-adv-x="628" d="M66.9973 0l0 666.997 495.005 0 0 -666.997 -153.005 0 0 544.999 -188.995 0 0 -544.999 -153.005 0z"/>
+   <glyph unicode="Т" horiz-adv-x="489" d="M488.999 666.997l0 -131.995 -165.002 0 0 -535.002 -157.996 0 0 535.002 -166.001 0 0 131.995 488.999 0z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Franklin Gothic Demi";font-variant:normal;font-weight:normal;src:url("#FontID0") format(svg)}
+    .fil2 {fill:#1C1B17}
+    .fil1 {fill:#EF7F1A;fill-rule:nonzero}
+    .fil0 {fill:#1C1B17;fill-rule:nonzero}
+    .fnt0 {font-weight:normal;font-size:75.75px;font-family:'Franklin Gothic Demi'}
+   ]]>
+  </style>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <polygon class="fil0" points="478.79,130.44 442.19,130.44 442.19,49.64 478.79,49.64 "/>
+  <path class="fil1" d="M424.08 130.44l-36.6 0 0 -130.44 96.92 0c14.73,0 26.6,4.08 35.6,12.23 9,8.15 13.5,18.39 13.5,30.71l0 87.5 -36.41 0 0 -82.25c0,-5.68 -1.63,-9.9 -4.89,-12.68 -3.26,-2.78 -8.64,-4.17 -16.12,-4.17l-51.99 0 0 99.1z"/>
+  <path class="fil0" d="M259.65 85.69l0 -85.69 36.6 0 0 85.33c0,9.18 4.41,13.77 13.23,13.77l17.57 0 0 -99.1 36.41 0 0 130.44 -65.76 0c-3.14,0 -8.09,-0.94 -14.86,-2.81 -6.76,-1.87 -12.32,-6.07 -16.67,-12.59 -4.35,-6.52 -6.52,-16.31 -6.52,-29.35z"/>
+  <polygon class="fil0" points="216.06,52.72 238.71,0 203.56,0 182.73,52.72 "/>
+  <polygon class="fil0" points="148.3,130.44 183.99,130.44 194.14,107.61 162.43,0 126.93,0 158.09,107.61 "/>
+  <g id="_2947200782768">
+   <polygon class="fil0" points="103.27,80.8 103.27,0 66.67,0 66.67,80.8 "/>
+   <path class="fil0" d="M47.47 99.1c-4.11,0 -7.13,-1.15 -9.06,-3.44 -0.85,-1.33 -1.39,-2.66 -1.63,-3.99 -0.24,-1.33 -0.36,-3.93 -0.36,-7.79l0 -83.88 -36.41 0 0 88.77c0,12.92 3.44,23.07 10.33,30.44 7.01,7.49 16.18,11.23 27.54,11.23l35.69 0 0 9.6 36.6 0 0 -40.94 -62.68 0z"/>
+  </g>
+  <g transform="matrix(2.66419E-14 -1 1 2.66419E-14 -6126.06 5213.38)">
+   <text x="5080.29" y="6721.75"  class="fil2 fnt0">ОПТ</text>
+  </g>
+ </g>
+</svg>
