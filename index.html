@@ -97,7 +97,7 @@
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         
         .logo {
@@ -110,24 +110,6 @@
         .logo img {
             height: 40px;
             width: auto;
-        }
-        
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .logo-main {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-orange);
-            line-height: 1;
-        }
-        
-        .logo-sub {
-            font-size: 12px;
-            color: var(--medium-gray);
-            line-height: 1;
         }
         
         /* Marketplace Switcher */
@@ -510,10 +492,6 @@
                 <div class="logo-section">
                     <a href="#" class="logo">
                         <img src="images/logo-opt.png" alt="ЦУИМ.Опт">
-                        <div class="logo-text">
-                            <div class="logo-main">ЦУИМ</div>
-                            <div class="logo-sub">ОПТОВЫЙ МАРКЕТПЛЕЙС</div>
-                        </div>
                     </a>
                     
                     <div class="marketplace-switcher">
@@ -681,12 +659,11 @@
                     // Добавляем активный класс к выбранной опции
                     this.classList.add('active');
                     
-                    // В реальном приложении здесь будет переключение между маркетплейсами
+                    // Переход на соответствующий маркетплейс
                     if (target === 'retail') {
-                        window.location.href = 'https://ciuim.ru'; // Переход на обычный маркетплейс
-                    } else {
-                        // Мы уже на оптовом маркетплейсе
-                        console.log('Оптовый маркетплейс');
+                        window.location.href = 'https://nyaganmaksimov-sys.github.io/cuim/'; // Обычный маркетплейс
+                    } else if (target === 'opt') {
+                        window.location.href = 'https://nyaganmaksimov-sys.github.io/ciuim-opt/'; // Оптовый маркетплейс
                     }
                 });
             });
@@ -698,6 +675,11 @@
             
             document.querySelector('.btn-primary').addEventListener('click', function() {
                 alert('Форма регистрации для предпринимателей');
+            });
+            
+            // Обработка кнопки "Начать покупки"
+            document.querySelector('.hero .btn-primary').addEventListener('click', function() {
+                window.location.href = '#categories';
             });
         });
     </script>
